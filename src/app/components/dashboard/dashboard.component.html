@@ -1,0 +1,50 @@
+<div class="container" style="margin-top: 6em">
+  <div class="card inner-main">
+    <div class="card-header">
+      Dashboard
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <canvas baseChart
+                  [type]="'doughnut'"
+                  [datasets]="pieChartDatasets"
+                  [labels]="pieChartLabels"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins"
+                  [legend]="pieChartLegend">
+          </canvas>
+        </div>
+        <div class="col-6">
+          <canvas baseChart
+                  [type]="'bar'"
+                  [datasets]="pieChartDatasets2"
+                  [labels]="pieChartLabels2"
+                  [options]="pieChartOptions2"
+                  [plugins]="pieChartPlugins2"
+                  [legend]="pieChartLegend2">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <hr>
+      <h2>tableUsers</h2>
+
+      <table>
+        <tr>
+          <th>firstName</th>
+          <th>lastName</th>
+          <th>username</th>
+        </tr>
+
+        <tr *ngFor="let item of dataUser">
+          <td>{{item.firstName}}</td>
+          <td>{{item.lastName}}</td>
+          <td>{{item.username}}</td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>
