@@ -1,29 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TokenService } from './shared/token.service';
-import { AuthStateService } from './shared/auth-state.service';
+import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isSignedIn!: boolean;
-  title = 'frontend';
-  constructor(
-    private auth: AuthStateService,
-    public router: Router,
-    public token: TokenService
-  ) {}
-  ngOnInit() {
-    this.auth.userAuthState.subscribe((val) => {
-      this.isSignedIn = val;
-    });
-  }
-  // Signout
-  signOut() {
-    this.auth.setAuthState(false);
-    this.token.removeToken();
-    this.router.navigate(['login']);
-  }
+
+     constructor(public location: Location) {}
+
+    ngOnInit(){
+    }
+
+    isMap(path){
+      var titlee = this.location.prepareExternalUrl(this.location.path());
+      titlee = titlee.slice( 1 );
+      if(path == titlee){
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
 }
