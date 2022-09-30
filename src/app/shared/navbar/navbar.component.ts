@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Router } from '@angular/router';
+import { TokenService } from '../../shared/token.service';
+import { AuthStateService } from '../../shared/auth-state.service';
 
 @Component({
     // moduleId: module.id,
@@ -13,8 +16,15 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    isSignedIn!: boolean;
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(
+      location: Location,
+      private element: ElementRef,
+      private auth: AuthStateService,
+      public router: Router,
+      public token: TokenService
+    ) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -23,6 +33,10 @@ export class NavbarComponent implements OnInit{
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+      this.auth.userAuthState.subscribe((val) => {
+        this.isSignedIn = val;
+      });
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -62,5 +76,12 @@ export class NavbarComponent implements OnInit{
           }
       }
       return 'Dashboard';
+    }
+
+  // Signout
+    signOut() {
+      this.auth.setAuthState(false);
+      this.token.removeToken();
+      this.router.navigate(['login']);
     }
 }

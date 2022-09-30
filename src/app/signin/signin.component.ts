@@ -13,23 +13,34 @@ import { AuthStateService } from '../shared/auth-state.service';
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   errors:any = null;
+  isSignedIn!: boolean;
+  showform: boolean = true;
   constructor(
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
     private token: TokenService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
   ) {
     this.loginForm = this.fb.group({
       username: [],
       password: [],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.authState.userAuthState.subscribe((val) => {
+      this.isSignedIn = val;
+      console.log(this.isSignedIn)
+      if (this.isSignedIn){
+        this.router.navigate(['dashboard']);
+      }
+    });
+  }
 
   onSubmit() {
     this.loginForm.value.username = 'user@aemenersol.com';
     this.loginForm.value.password = 'Test@123';
+    this.showform = false;
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
         this.responseHandler(result);
@@ -41,6 +52,7 @@ export class SigninComponent implements OnInit {
         this.authState.setAuthState(true);
         this.loginForm.reset();
         this.router.navigate(['dashboard']);
+        this.showform = true;
       }
     );
   }
