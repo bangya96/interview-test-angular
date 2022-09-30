@@ -14,7 +14,7 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "^13.2.6",
-        "@angular/cdk": "^13.2.6",
+        "@angular/cdk": "^13.3.9",
         "@angular/common": "^13.2.6",
         "@angular/compiler": "^13.2.6",
         "@angular/core": "^13.2.6",
@@ -35,6 +35,8 @@
         "core-js": "3.8.1",
         "googleapis": "66.0.0",
         "jquery": "3.5.1",
+        "ng-apexcharts": "^1.7.1",
+        "ng2-charts": "^3.1.2",
         "perfect-scrollbar": "1.5.0",
         "rxjs": "^7.5.5",
         "zone.js": "~0.11.5"
@@ -44,9 +46,9 @@
         "@angular/cli": "^13.2.6",
         "@angular/compiler-cli": "^13.2.6",
         "@angular/language-service": "13.2.6",
+        "@types/chartist": "0.11.0",
         "@types/jasmine": "~3.10.3",
         "@types/jasminewd2": "~2.0.10",
-        "@types/chartist": "0.11.0",
         "@types/jquery": "3.5.1",
         "@types/node": "16.3.2",
         "codelyzer": "6.0.2",
