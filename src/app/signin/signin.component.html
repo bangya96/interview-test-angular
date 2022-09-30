@@ -3,8 +3,10 @@
     <h1>Login</h1>
     <label for="email">Email</label>
     <input type="email" name="email" id="email" required formControlName="username" />
+    <p *ngIf="errors.Username" style="color: red">{{errors.Username}}</p>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required formControlName="password" />
+    <p *ngIf="errors.Password" style="color: red">{{errors.Password}}</p>
     <button type="submit">Login</button>
   </form>
   <img style="margin-top: 20%;margin-left: 43%;height: 250px;" src="assets/img/loading.gif" alt="..." *ngIf="!showform" />

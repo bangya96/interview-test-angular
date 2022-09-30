@@ -38,8 +38,8 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loginForm.value.username = 'user@aemenersol.com';
-    this.loginForm.value.password = 'Test@123';
+    // this.loginForm.value.username = 'user@aemenersol.com';
+    // this.loginForm.value.password = 'Test@123';
     this.showform = false;
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
@@ -47,6 +47,7 @@ export class SigninComponent implements OnInit {
       },
       (error) => {
         this.errors = error.error;
+        this.showform = true;
       },
       () => {
         this.authState.setAuthState(true);
